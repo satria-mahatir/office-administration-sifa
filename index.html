@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Let's Learn About Office Administration</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #ff6b9d;
+            --secondary: #ff85a2;
+            --accent: #ff4d7a;
+            --light: #fff0f5;
+            --dark: #8a446c;
+            --success: #ff9ebb;
+            --pink-light: #ffecf1;
+            --pink-medium: #ffc2d6;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--pink-light);
+            color: #5a3a4a;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 15px rgba(255, 107, 157, 0.3);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo i {
+            margin-right: 10px;
+            font-size: 2rem;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav li {
+            margin-left: 2rem;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 5px 10px;
+            border-radius: 20px;
+        }
+        
+        nav a:hover, nav a.active {
+            background-color: rgba(255, 255, 255, 0.3);
+        }
+        
+        .mobile-menu {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        /* Main Content */
+        main {
+            margin-top: 80px;
+        }
+        
+        section {
+            padding: 5rem 0;
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+        }
+        
+        .section-content {
+            width: 100%;
+        }
+        
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            color: var(--dark);
+        }
+        
+        h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--dark);
+        }
+        
+        h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: var(--accent);
+        }
+        
+        p {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            color: #5a3a4a;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--primary);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(255, 107, 157, 0.4);
+        }
+        
+        .btn:hover {
+            background-color: var(--accent);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255, 107, 157, 0.5);
+        }
+        
+        /* Home Section */
+        #home {
+            background: linear-gradient(rgba(255, 240, 245, 0.9), rgba(255, 240, 245, 0.9)), url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="%23ffc2d6" opacity="0.3"/><path d="M30,30 Q50,10 70,30 T90,30" stroke="%23ff6b9d" stroke-width="2" fill="none"/></svg>');
+            background-size: cover;
+            text-align: center;
+        }
+        
+        .home-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .home-content h1 {
+            font-size: 3.5rem;
+            background: linear-gradient(to right, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1rem;
+        }
+        
+        .home-content p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .home-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        
+        /* Tujuan Section */
+        #tujuan {
+            background-color: white;
+        }
+        
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .card {
+            background-color: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 5px 20px rgba(255, 107, 157, 0.1);
+            transition: all 0.3s ease;
+            border-top: 4px solid var(--primary);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(to right, var(--primary), var(--accent));
+        }
+        
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(255, 107, 157, 0.15);
+        }
+        
+        .card i {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        /* Materi Section */
+        #materi {
+            background-color: var(--pink-light);
+        }
+        
+        .materi-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .materi-card {
+            background-color: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 5px 20px rgba(255, 107, 157, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .materi-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(255, 107, 157, 0.15);
+        }
+        
+        .materi-card h3 {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            color: var(--dark);
+        }
+        
+        .materi-card h3 i {
+            margin-right: 10px;
+            color: var(--primary);
+        }
+        
+        .materi-card ul {
+            padding-left: 1.5rem;
+        }
+        
+        .materi-card li {
+            margin-bottom: 0.8rem;
+            position: relative;
+        }
+        
+        .materi-card li::before {
+            content: '🌸';
+            position: absolute;
+            left: -1.5rem;
+        }
+        
+        /* Video Section */
+        #video {
+            background-color: white;
+        }
+        
+        .video-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .video-card {
+            background-color: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(255, 107, 157, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .video-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(255, 107, 157, 0.15);
+        }
+        
+        .video-frame {
+            height: 200px;
+            width: 100%;
+            border: none;
+        }
+        
+        .video-info {
+            padding: 1.5rem;
+        }
+        
+        /* Evaluasi Section */
+        #evaluasi {
+            background-color: var(--pink-light);
+        }
+        
+        .evaluasi-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .quiz-container {
+            background-color: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 5px 20px rgba(255, 107, 157, 0.1);
+            margin-top: 2rem;
+        }
+        
+        .question {
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px dashed var(--pink-medium);
+        }
+        
+        .question-number {
+            display: inline-block;
+            background-color: var(--primary);
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 30px;
+            margin-right: 10px;
+            font-weight: bold;
+        }
+        
+        .options {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+        
+        .option {
+            padding: 1rem;
+            background-color: var(--pink-light);
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+        
+        .option:hover {
+            background-color: var(--pink-medium);
+        }
+        
+        .option.selected {
+            background-color: var(--primary);
+            color: white;
+            border-color: var(--accent);
+        }
+        
+        .quiz-nav {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 2rem;
+        }
+        
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+        }
+        
+        .footer-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .footer-logo {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            nav ul {
+                display: none;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background-color: var(--secondary);
+                flex-direction: column;
+                padding: 1rem 0;
+                text-align: center;
+            }
+            
+            nav ul.show {
+                display: flex;
+            }
+            
+            nav li {
+                margin: 0.5rem 0;
+            }
+            
+            .mobile-menu {
+                display: block;
+            }
+            
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            h2 {
+                font-size: 2rem;
+            }
+            
+            .home-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .video-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-file-alt"></i>
+                    <span>Office Admin</span>
+                </div>
+                <div class="mobile-menu">
+                    <i class="fas fa-bars"></i>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="#home" class="active">Home</a></li>
+                        <li><a href="#tujuan">Tujuan</a></li>
+                        <li><a href="#materi">Materi</a></li>
+                        <li><a href="#video">Video</a></li>
+                        <li><a href="#evaluasi">Evaluasi</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Home Section -->
+        <section id="home">
+            <div class="container">
+                <div class="home-content">
+                    <h1>Let's Learn About Office Administration</h1>
+                    <p>Selamat datang di platform pembelajaran Administrasi Perkantoran! Mari kita eksplorasi dunia administrasi kantor dengan cara yang menyenangkan dan interaktif.</p>
+                    <div class="home-buttons">
+                        <a href="#tujuan" class="btn">Mulai Belajar <i class="fas fa-arrow-right"></i></a>
+                        <a href="#evaluasi" class="btn" style="background-color: var(--pink-medium); color: var(--dark);">Tes Pengetahuan</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tujuan Section -->
+        <section id="tujuan">
+            <div class="container">
+                <h2>Tujuan Pembelajaran</h2>
+                <p>Tujuan mempelajari administrasi perkantoran adalah untuk mengembangkan keterampilan profesional seperti efisiensi, organisasi, dan komunikasi, serta menguasai teknologi dan prosedur perkantoran.</p>
+                
+                <div class="cards">
+                    <div class="card">
+                        <i class="fas fa-file-alt"></i>
+                        <h3>Mengelola Dokumen</h3>
+                        <p>Mampu membuat, mengolah, dan mengelola dokumen dengan rapi dan efisien menggunakan software seperti Microsoft Word, Excel, dan PowerPoint.</p>
+                    </div>
+                    <div class="card">
+                        <i class="fas fa-chart-line"></i>
+                        <h3>Meningkatkan Efisiensi</h3>
+                        <p>Memanfaatkan teknologi untuk mengoptimalkan produktivitas, baik dalam menyusun jadwal, mengelola data, atau menyelesaikan tugas-tugas administratif lainnya.</p>
+                    </div>
+                    <div class="card">
+                        <i class="fas fa-archive"></i>
+                        <h3>Mengelola Kearsipan dan Data</h3>
+                        <p>Mampu menyusun, menyimpan, dan mengintegrasikan dokumen dan data secara sistematis dan tepat.</p>
+                    </div>
+                    <div class="card">
+                        <i class="fas fa-comments"></i>
+                        <h3>Keterampilan Manajerial & Komunikasi</h3>
+                        <p>Memiliki kemampuan manajerial, komunikasi yang efektif, dan berpikir strategis untuk mendukung kelancaran operasional kantor.</p>
+                    </div>
+                    <div class="card">
+                        <i class="fas fa-tasks"></i>
+                        <h3>Menjalankan Tugas Perkantoran</h3>
+                        <p>Menguasai berbagai tugas administratif umum, termasuk korespondensi, penanganan telepon, dan tugas-tugas terkait layanan pelanggan.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Materi Section -->
+        <section id="materi">
+            <div class="container">
+                <h2>Materi Pembelajaran</h2>
+                <p>Administrasi kantor mempelajari materi tentang pengelolaan perkantoran secara umum, termasuk manajemen operasional, pengelolaan dokumen dan arsip, komunikasi dan kesekretariatan.</p>
+                
+                <div class="materi-container">
+                    <div class="materi-card">
+                        <h3><i class="fas fa-building"></i> Manajemen Perkantoran</h3>
+                        <ul>
+                            <li>Fungsi manajemen: perencanaan, pengorganisasian, pengarahan, dan pengawasan</li>
+                            <li>Pengelolaan sarana dan prasarana kantor</li>
+                            <li>Prosedur kerja administratif dan standar operasional</li>
+                            <li>Teknik menyusun dan mengatur tata kerja kantor</li>
+                        </ul>
+                    </div>
+                    <div class="materi-card">
+                        <h3><i class="fas fa-folder-open"></i> Pengelolaan Dokumen & Informasi</h3>
+                        <ul>
+                            <li>Sistem pengarsipan dan manajemen kearsipan</li>
+                            <li>Surat-menyurat resmi dan korespondensi bisnis</li>
+                            <li>Pengolahan dan pendataan informasi kantor</li>
+                            <li>Membuat laporan, rekap data, dan dokumentasi kerja</li>
+                        </ul>
+                    </div>
+                    <div class="materi-card">
+                        <h3><i class="fas fa-comment-dots"></i> Komunikasi & Kesekretariatan</h3>
+                        <ul>
+                            <li>Menangani panggilan telepon dan pesan</li>
+                            <li>Pengetahuan protokoler serta hubungan masyarakat</li>
+                            <li>Manajemen komplain dan pelayanan prima</li>
+                        </ul>
+                    </div>
+                    <div class="materi-card">
+                        <h3><i class="fas fa-tools"></i> Materi Pendukung</h3>
+                        <ul>
+                            <li>Stenografi dan teknik mengetik cepat</li>
+                            <li>Pembukuan dan akuntansi dasar</li>
+                            <li>Dasar-dasar hukum ketenagakerjaan</li>
+                            <li>Bahasa Inggris untuk komunikasi bisnis</li>
+                            <li>Keterampilan digital dan aplikasi perkantoran</li>
+                        </ul>
+                    </div>
+                    <div class="materi-card">
+                        <h3><i class="fas fa-user-tie"></i> Sikap & Etika Kerja</h3>
+                        <ul>
+                            <li>Sikap profesional, berpenampilan rapi, dan beretika</li>
+                            <li>Kemampuan berpikir strategis & pemecahan masalah</li>
+                            <li>Kerja sama tim dan disiplin kerja</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Video Section -->
+        <section id="video">
+            <div class="container">
+                <h2>Video Pembelajaran</h2>
+                <p>Tonton video penjelasan untuk memperdalam pemahaman Anda tentang Administrasi Perkantoran:</p>
+                
+                <div class="video-container">
+                    <div class="video-card">
+                        <iframe class="video-frame" src="https://www.youtube.com/embed/q2EpVSF5b60" title="KONSEP DASAR ADMINISTRASI PERKANTORAN" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        <div class="video-info">
+                            <h3>Konsep Dasar Administrasi Perkantoran</h3>
+                            <p>Di video ini kalian bisa mengetahui konsep konsep dasar tentang Administrasi Perkantoran.</p>
+                        </div>
+                    </div>
+                    <div class="video-card">
+                        <iframe class="video-frame" src="https://www.youtube.com/embed/6b-Nf5MYotA" title="Video Pembelajaran Administrasi & Organisasi perkantoran" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        <div class="video-info">
+                            <h3>Administrasi & Organisasi Perkantoran</h3>
+                            <p>Video ini adalah penjelasan tentang Administrasi dan Organisasi Perkantoran.</p>
+                        </div>
+                    </div>
+                    <div class="video-card">
+                        <iframe class="video-frame" src="https://www.youtube.com/embed/tPhvyBPbxsg" title="5 Skill Microsoft Word yang Wajib Dikuasai" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        <div class="video-info">
+                            <h3>5 Skill Microsoft Word yang Wajib Dikuasai</h3>
+                            <p>Di sini kalian bisa mempelajari skill Microsoft Word yang diperlukan untuk bekerja di Administrasi Perkantoran.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Evaluasi Section -->
+        <section id="evaluasi">
+            <div class="container">
+                <div class="evaluasi-content">
+                    <h2>Evaluasi Pembelajaran</h2>
+                    <p>Uji pemahaman Anda dengan 15 soal evaluasi berikut:</p>
+                    
+                    <div class="quiz-container">
+                        <div class="question">
+                            <span class="question-number">1</span>
+                            <h3>Apa tujuan utama mempelajari administrasi perkantoran?</h3>
+                        </div>
+                        
+                        <div class="options">
+                            <div class="option">A. Hanya untuk belajar mengetik cepat</div>
+                            <div class="option">B. Mengembangkan keterampilan profesional dan menguasai teknologi perkantoran</div>
+                            <div class="option">C. Supaya bisa menjadi bos perusahaan</div>
+                            <div class="option">D. Untuk menghindari pekerjaan lapangan</div>
+                        </div>
+                        
+                        <div class="question">
+                            <span class="question-number">2</span>
+                            <h3>Software apa saja yang perlu dikuasai dalam administrasi perkantoran?</h3>
+                        </div>
+                        
+                        <div class="options">
+                            <div class="option">A. Hanya Microsoft Word</div>
+                            <div class="option">B. Microsoft Word, Excel, dan PowerPoint</div>
+                            <div class="option">C. Hanya aplikasi editing foto</div>
+                            <div class="option">D. Semua game terbaru</div>
+                        </div>
+                        
+                        <div class="question">
+                            <span class="question-number">3</span>
+                            <h3>Apa yang dimaksud dengan manajemen kearsipan?</h3>
+                        </div>
+                        
+                        <div class="options">
+                            <div class="option">A. Menyusun, menyimpan, dan mengintegrasikan dokumen secara sistematis</div>
+                            <div class="option">B. Membuang semua dokumen lama</div>
+                            <div class="option">C. Hanya menata buku di perpustakaan</div>
+                            <div class="option">D. Mengumpulkan sampah kertas</div>
+                        </div>
+                        
+                        <!-- Soal-soal lainnya akan ditambahkan di sini -->
+                        
+                        <div class="quiz-nav">
+                            <button class="btn" style="background-color: var(--pink-medium); color: var(--dark);">
+                                <i class="fas fa-arrow-left"></i> Sebelumnya
+                            </button>
+                            <button class="btn">Selanjutnya <i class="fas fa-arrow-right"></i></button>
+                        </div>
+                        
+                        <div style="text-align: center; margin-top: 2rem;">
+                            <button class="btn" style="background-color: var(--accent);">
+                                <i class="fas fa-paper-plane"></i> Kirim Jawaban
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <i class="fas fa-file-alt"></i> Office Admin
+                </div>
+                <h3>Let's Learn About Office Administration</h3>
+                <p>&copy; 2023 Platform Pembelajaran Administrasi Perkantoran. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        document.querySelector('.mobile-menu').addEventListener('click', function() {
+            document.querySelector('nav ul').classList.toggle('show');
+        });
+        
+        // Smooth Scrolling
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                window.scrollTo({
+                    top: targetElement.offsetTop - 80,
+                    behavior: 'smooth'
+                });
+                
+                // Update active nav link
+                document.querySelectorAll('nav a').forEach(link => {
+                    link.classList.remove('active');
+                });
+                this.classList.add('active');
+                
+                // Close mobile menu after clicking
+                if (window.innerWidth <= 768) {
+                    document.querySelector('nav ul').classList.remove('show');
+                }
+            });
+        });
+        
+        // Quiz Option Selection
+        document.querySelectorAll('.option').forEach(option => {
+            option.addEventListener('click', function() {
+                // Remove selected class from siblings in the same question
+                const parentOptions = this.parentElement;
+                parentOptions.querySelectorAll('.option').forEach(opt => {
+                    opt.classList.remove('selected');
+                });
+                
+                // Add selected class to clicked option
+                this.classList.add('selected');
+            });
+        });
+        
+        // Update active nav on scroll
+        window.addEventListener('scroll', function() {
+            let current = '';
+            const sections = document.querySelectorAll('section');
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (pageYOffset >= (sectionTop - 100)) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            document.querySelectorAll('nav a').forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + current) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
